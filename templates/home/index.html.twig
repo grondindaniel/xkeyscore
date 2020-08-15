@@ -3,5 +3,170 @@
 {% block title %}Yo !{% endblock %}
 
 {% block body %}
+    <style>
+        body{
+            background-color: #f5f6fa;
+        }
+        * {
+            box-sizing: border-box;
+        }
+
+        #myInput {
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+
+        #myTable {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #ddd;
+            font-size: 18px;
+        }
+
+        #myTable th, #myTable td {
+            text-align: left;
+            padding: 12px;
+        }
+
+        #myTable tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        #myTable tr.header, #myTable tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+    <div class="row">
+        <div class="col-md-1">
+            <a href="https://symfony.com/" target="_blank">
+            <img src="https://img.icons8.com/windows/128/000000/symfony.png"/>
+            </a>
+        </div>
+        <div class="col-md-1">
+            <a href="https://github.com/grondindaniel" target="_blank">
+            <img src="https://img.icons8.com/windows/128/000000/github.png"/>
+            </a>
+        </div>
+        <div class="col-md-1">
+            <a href="https://travis-ci.com/github/grondindaniel/todolist" target="_blank">
+            <img src="https://img.icons8.com/color/128/000000/travis-ci.png"/>
+            </a>
+        </div>
+        <div class="col-md-1">
+            <a href="https://duckduckgo.com/" target="_blank">
+            <img src="https://img.icons8.com/color/128/000000/duckduckgo--v1.png"/>
+            </a>
+        </div>
+        <div class="col-md-1">
+            <a href="https://www.google.fr/" target="_blank">
+                <img src="https://img.icons8.com/color/128/000000/google-logo.png"/>
+            </a>
+        </div>
+        <div class="col-md-1">
+            <a href="https://learn.unity.com/tutorials" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/128/000000/unity.png"/>
+            </a>
+        </div>
+        <div class="col-md-1">
+            <a href="https://docs.microsoft.com/fr-fr/dotnet/csharp/" target="_blank">
+            <img src="https://img.icons8.com/color/128/000000/c-sharp-logo-2.png"/>
+            </a>
+        </div>
+        <div class="col-md-1">
+            <a href="https://www.php.net/manual/fr/" target="_blank">
+            <img src="https://img.icons8.com/plasticine/128/000000/elephant.png"/>
+            </a>
+        </div>
+        <div class="col-md-1">
+            <a href="https://www.youtube.com/?hl=fr&gl=FR" target="_blank">
+            <img src="https://img.icons8.com/nolan/128/youtube-squared.png"/>
+            </a>
+        </div>
+        <div class="col-md-1">
+            <a href="https://www.w3schools.com/default.asp" target="_blank">
+            <img src="https://img.icons8.com/color/128/000000/origami.png"/>
+            </a>
+        </div>
+        <div class="col-md-1">
+            <a href="https://www.grafikart.fr/" target="_blank">
+            <img src="https://img.icons8.com/fluent/128/000000/popcorn.png"/>
+            </a>
+        </div>
+        <div class="col-md-1">
+            <a href="https://openclassrooms.com/fr/" target="_blank">
+            <img src="https://img.icons8.com/nolan/128/book.png"/>
+            </a>
+        </div>
+<div class="container" style="margin-top: 100px;">
+        <div class="row">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="" title="Type in a name">
+
+            <table id="myTable">
+                <tr class="header">
+                    <th style="width:60%;">Recherche</th>
+                    <th style="width:40%;">Thème</th>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td>Berglunds snabbkop</td>
+                    <td>Sweden</td>
+                </tr>
+                <tr>
+                    <td>Island Trading</td>
+                    <td>UK</td>
+                </tr>
+                <tr>
+                    <td>Koniglich Essen</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td>Laughing Bacchus Winecellars</td>
+                    <td>Canada</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                    <td>Italy</td>
+                </tr>
+                <tr>
+                    <td>North/South</td>
+                    <td>UK</td>
+                </tr>
+                <tr>
+                    <td>Paris specialites</td>
+                    <td>France</td>
+                </tr>
+            </table>
+
+            <script>
+                function myFunction() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[0];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+            </script>
+        </div>
+    </div>
+    </div>
 
 {% endblock %}
