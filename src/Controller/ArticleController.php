@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
+
 use App\Form\ArticleType;
-use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +16,6 @@ class ArticleController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $manager)
     {
-        $article = new Article();
         $form = $this->createForm(ArticleType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
