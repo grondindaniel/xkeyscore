@@ -112,10 +112,12 @@
                     <th>Tag.s</th>
                 </tr>
                 {% for article in articles %}
+
                 <tr>
-                        <td>{{ article.name }}</td>
+                        <td>  <a href="{{ path('view',{id: article.id}) }}" style="color:black;">{{ article.name }}</a></td>
                         <td>{{ article.tag }}</td>
                 </tr>
+
                 {% endfor %}
             </table>
 
