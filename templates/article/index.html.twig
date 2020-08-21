@@ -33,6 +33,9 @@
         <div class="yes">
             {{ message }}
         </div>
+        <a href="{{ path('home') }}">
+            <button type="submit">Back</button>
+        </a>
     {% endfor %}
     {% for message in  app.flashes('warning') %}
         <div class="no">
