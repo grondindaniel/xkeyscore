@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  sam. 12 sep. 2020 à 22:13
+-- Généré le :  ven. 18 sep. 2020 à 22:04
 -- Version du serveur :  8.0.20
 -- Version de PHP :  7.3.8
 
@@ -93,7 +93,24 @@ CREATE TABLE `doctrine_migration_versions` (
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 ('DoctrineMigrations\\Version20200815191042', '2020-08-15 19:10:50', 71),
-('DoctrineMigrations\\Version20200815210856', '2020-08-15 21:09:06', 100);
+('DoctrineMigrations\\Version20200815210856', '2020-08-15 21:09:06', 100),
+('DoctrineMigrations\\Version20200915090225', '2020-09-15 09:02:37', 92),
+('DoctrineMigrations\\Version20200915093934', '2020-09-15 09:39:41', 44),
+('DoctrineMigrations\\Version20200915094352', '2020-09-15 09:43:59', 61),
+('DoctrineMigrations\\Version20200916184023', '2020-09-16 18:40:33', 140),
+('DoctrineMigrations\\Version20200916185003', '2020-09-16 18:50:12', 56);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `image`
+--
+
+CREATE TABLE `image` (
+  `id` int NOT NULL,
+  `article_id` int DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -132,6 +149,13 @@ ALTER TABLE `doctrine_migration_versions`
   ADD PRIMARY KEY (`version`);
 
 --
+-- Index pour la table `image`
+--
+ALTER TABLE `image`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_C53D045F7294869C` (`article_id`);
+
+--
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
@@ -146,13 +170,29 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT pour la table `image`
+--
+ALTER TABLE `image`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `image`
+--
+ALTER TABLE `image`
+  ADD CONSTRAINT `FK_C53D045F7294869C` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
