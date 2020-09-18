@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Image;
 use App\Form\ArticleType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +21,16 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
         {
+            $images = $form->get('images')->getData();
             $article = $form->getData();
+            foreach ($images as $image)
+            {
+                $fichier = md5(uniqid()).'.'.$image->guessExtension();
+                $image->move($this->getParameter('images_directory'), $fichier);
+                $img = new Image();
+                $img->setName($fichier);
+                $article->addImage($img);
+            }
             try {
                 $manager->persist($article);
                 $manager->flush();

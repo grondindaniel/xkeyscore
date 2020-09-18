@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,9 +44,17 @@ class Article
      */
     private $createdAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="article", cascade={"persist", "remove"})
+     */
+    private $image;
+
+
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->image = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,4 +121,36 @@ class Article
 
         return $this;
     }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImage(): Collection
+    {
+        return $this->image;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->image->contains($image)) {
+            $this->image[] = $image;
+            $image->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->image->contains($image)) {
+            $this->image->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getArticle() === $this) {
+                $image->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+    
 }

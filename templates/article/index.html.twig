@@ -54,7 +54,9 @@
         {{ form_widget(form.content) }}
         {{ form_label(form.link) }}
         {{ form_widget(form.link) }}
-        <br>
+        {{ form_label(form.images) }}
+        {{ form_widget(form.images) }}
+        <br><br>
         <button type="submit" class="btn btn-primary">Ajouter</button>
     {{ form_end(form) }}
 </div>

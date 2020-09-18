@@ -52,5 +52,8 @@
     <br>
     Lien : <br>
     {{ article.0.link }}
+    {% for ima in images %}
+        <img src="{{ asset('uploads/'~ ima.name) }}" class="img-thumbnail">
+    {% endfor %}
 </div>
 {% endblock %}
