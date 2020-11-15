@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 
+use App\Entity\Article;
 use App\Entity\Image;
 use App\Form\ArticleType;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,6 +45,26 @@ class ArticleController extends AbstractController
             }
         }
         return $this->render('article/index.html.twig', ['form'=>$form->createView()]);
+    }
+
+    /**
+     * @Route("article/edit/{id}", name="articleEdit")
+     */
+    public function articleEdit($id, Article $article, Request $request)
+    {
+       $form = $this->createForm(ArticleType::class, $article);
+       $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('article/edit.html.twig', [
+            'article' => $article,
+            'form' => $form->createView(),
+        ]);
+
     }
 
 }

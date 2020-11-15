@@ -13,31 +13,39 @@
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
-    <div class="container">
-    <h1 class="h3 mb-3 font-weight-normal"></h1>
-    <label for="inputUsername"></label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
-    <label for="inputPassword"></label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
+    <header class="masthead2" style="height: 1000px;">
+        {% for message in  app.flashes('pwdok') %}
+            <div class="alert success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in  app.flashes('pwdbad') %}
+            <div class="alert danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div class="container h-50">
+            <div class="row h-100 align-items-center justify-content-center text-center">
+                <div class="col-lg-10 align-self-end" style="color: white;">
+                    <h1 class="h3 mb-3 font-weight-normal" style="text-align: center;" id="lab">Login</h1>
+                    <hr class="divider my-4" />
+                    <label for="inputUsername">Username</label>
+                    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
+                    <br>
+                    <label for="inputPassword" id="lab">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" required>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <hr class="divider my-4" />
+                </div>
+                <div class="col-lg-8 align-self-baseline">
+                    <button class="btn btn-lg btn-primary" type="submit">
+                        Sign in
+                    </button>
+                </div>
+            </div>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
         </div>
-    #}
+    </header>
 
-    <button class="btn btn-lg btn-primary" type="submit" style="visibility: hidden;">
-        Ok
-    </button>
-    </div>
 </form>
 {% endblock %}

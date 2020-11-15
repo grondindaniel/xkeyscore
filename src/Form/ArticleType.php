@@ -24,6 +24,7 @@ class ArticleType extends AbstractType
                 'attr' => array('multiple'=>true),
                 'multiple'=>true,
                 'data_class'=>null))
+
         ;
     }
 
